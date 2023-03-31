@@ -8,12 +8,12 @@ import androidx.room.Query
 @Dao
 interface IBookDao {
 
-    @Query("SELECT * FROM book_entity_table")
+    @Query("SELECT * FROM book_table")
     fun getList(): List<BookEntity>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(book:BookEntity)
 
-    @Query("DELETE FROM book_entity_table")
+    @Query("DELETE FROM book_table")
     suspend fun deleteAll()
 }

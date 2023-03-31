@@ -1,14 +1,12 @@
 package com.ucb.parcial2
 
-import IBookDao
+class BookRepository(private val bookDao: IBookDao) {
 
-class BookRepository(private val postDao: IBookDao) {
-
-    suspend fun insert(post: BookEntity) {
-        postDao.insert(post)
+    suspend fun insert(book: BookEntity) {
+        bookDao.insert(book)
     }
 
-    fun getListPosts(): List<BookEntity> {
-        return postDao.getList()
+    fun getListBooks(): List<BookEntity> {
+        return bookDao.getList()
     }
 }

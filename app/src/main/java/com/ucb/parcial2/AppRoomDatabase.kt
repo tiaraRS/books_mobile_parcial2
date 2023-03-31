@@ -1,13 +1,12 @@
+package com.ucb.parcial2
+
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.ucb.parcial2.BookEntity
-import com.ucb.parcial2.Post
-
 @Database(entities = arrayOf(BookEntity::class), version = 1, exportSchema = false)
 abstract class AppRoomDatabase: RoomDatabase() {
-    abstract fun postDato(): IBookDao
+    abstract fun bookDato(): IBookDao
 
     companion object {
         private var INSTANCE : AppRoomDatabase? = null
@@ -26,4 +25,3 @@ abstract class AppRoomDatabase: RoomDatabase() {
         }
     }
 }
-

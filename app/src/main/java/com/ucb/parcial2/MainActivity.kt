@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.Gson
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,28 +17,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        retrofit()
-        GlobalScope.launch {
-            val postDao = AppRoomDatabase.getDatabase(applicationContext).postDato()
-            val repository = PostRepository(postDao)
-            repository.insert(PostEntity("the best seller: Android","this is descirption"))
-            val lista = repository.getListPosts()
-            lista.forEach {
-                Log.d("DBTEST","Id book = ${it.id}, Title: ${it.title}, Body: ${it.description}")
-            }
-        }
-
-    }
-    suspend fun createDB(listPosts: ArrayList<Post>){
-        val postDao = AppRoomDatabase.getDatabase(applicationContext).postDato()
-        val repository = PostRepository(postDao)
-        repository.insert(PostEntity("the best seller: Android", "this is descirption"))
-        val lista = repository.getListPosts()
-        lista.forEach {
-            Log.d("DBTEST", "Id book = ${it.id}, Title: ${it.title}, Body: ${it.description}")
-        }
-    }
-    fun retrofit(){
         //RETROFIT
         val restApiAdapter = RestApiAdapter()
         val endPoint = restApiAdapter.connectionApi()
@@ -62,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                 setUpRecyclerView(listPosts)
             }
         })
+
     }
     fun setUpRecyclerView(listPosts: ArrayList<Post>){
         Log.d("listPosts OUT", listPosts.size.toString())
